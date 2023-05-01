@@ -1,0 +1,77 @@
+div.profileViewer {
+  .profileListing {
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr;
+    gap: 0.5rem;
+    padding: 4px 0px;
+    width: 500px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    color: #6d6d6d;
+    text-decoration: none;
+    &:hover {
+      background-color: #99a7d4;
+      color: #fff;
+    }
+  }
+  button {
+    background-color: #99a7d4;
+    color: #fff;
+    padding: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  #previous {
+    position: fixed;
+    top: 50%;
+    left: 0px;
+  }
+  #next {
+    position: fixed;
+    top: 50%;
+    right: 0px;
+  }
+}
+
+div.profile__container {
+  display: grid;
+  position: relative;
+  max-width: 800px;
+  margin: 0px auto;
+  padding: 1rem;
+  grid-template-areas:
+    "profile listings"
+    "wins listings";
+  gap: 0.5rem;
+  div {
+    padding: 0.5rem;
+    background-color: #fff;
+  }
+
+  .listOfItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .profileData__container {
+    grid-area: profile;
+    border: 1px solid #ccc;
+    div {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      max-width: 100%;
+    }
+  }
+  .profileData__listings {
+    grid-area: listings;
+    border: 1px solid #ccc;
+  }
+  .profileData__wins {
+    min-height: 10px;
+    grid-area: wins;
+    border: 1px solid #ccc;
+  }
+}
