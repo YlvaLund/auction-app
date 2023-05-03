@@ -34,6 +34,16 @@ const Navigation = () => {
             <li>
               <Link to="/profiles">Profiles</Link>
             </li>
+            <li>
+              <Link
+                to="/"
+                onClick={() => {
+                  destroyToken();
+                }}
+              >
+                Logout
+              </Link>
+            </li>
           </>
         ) : (
           <>
@@ -49,16 +59,7 @@ const Navigation = () => {
             </li>
           </>
         )}
-        <li>
-          <Link
-            to="/"
-            onClick={() => {
-              destroyToken();
-            }}
-          >
-            Logout
-          </Link>
-        </li>
+
         <li>
           <Link to="/about" onClick={toggleMenu}>
             About

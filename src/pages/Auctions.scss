@@ -63,20 +63,43 @@ div.auction__tag__container {
   bottom: 3px;
   left: 3px;
   gap: 1rem;
-  .auction__tag {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: #767676;
-    user-select: none;
-    cursor: pointer;
-    transition: 0.2s transform ease;
-    &:hover {
-      transform: scale(1.1);
-    }
+}
+
+.auction__tag {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #767676;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s transform ease;
+}
+.auction__tag::before {
+  content: "#";
+  color: #767676;
+}
+
+.auction__toolbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  place-content: center;
+  align-items: center;
+  input {
+    padding: 4px;
   }
 
-  .auction__tag::before {
-    content: "#";
-    color: #767676;
+  button {
+    background-color: #d0e0cb;
+    border: 2px solid #3c7a3b;
+    outline: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+      background-color: #3c7a3b;
+      color: #d0e0cb;
+    }
   }
 }

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAuction } from "../utils/auctions";
 import "./Auction.scss";
+import { getUserDetails } from "../utils/token";
+import { setNewBid as sendNewBid } from "../utils/auctions";
 
 function Auction() {
   const [auctionDetails, setAuctionDetails] = useState({});
   const [newBid, setNewBid] = useState(0);
   const { auctionId } = useParams();
+  const [userName, credits] = getUserDetails();
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -100,13 +103,17 @@ function Auction() {
                   type="number"
                   value={newBid}
                   onChange={(e) => {
-                    setNewBid(e.target.value);
+                    const tempBid = parseInt(e.target.value);
+                    if (tempBid <= credits) {
+                      setNewBid(tempBid);
+                    }
                   }}
                 />
                 <button
-                  onClick={() => {
+                  onClick={async () => {
                     if (currentBid < newBid) {
-                      console.log("!");
+                      const res = await sendNewBid(auctionDetails?.id, newBid);
+                      console.log(res);
                     } else {
                       alert("You can not bid unless the new bid is higher than the current bid.");
                     }

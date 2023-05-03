@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getAllUsers, getUser } from "../utils/users";
+import { getUserDetails } from "../utils/token";
 import "./Profile.scss";
 
 export default function Profile() {
@@ -8,6 +9,7 @@ export default function Profile() {
   const [profileData, setProfileData] = useState({});
   const [currentOffset, setCurrentOffset] = useState(0);
   const { name } = useParams();
+  const [userName] = getUserDetails();
 
   useEffect(() => {
     const getProfile = async () => {
@@ -22,6 +24,18 @@ export default function Profile() {
       getProfile();
     }
   }, [name]);
+
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      const res = await getAllUsers(currentOffset);
+      console.log(res);
+      if (res?.data?.length > 0) {
+        setAllProfiles(res.data ?? []);
+      }
+    };
+
+    fetchAllUsers();
+  }, [currentOffset]);
 
   if (name?.length > 0) {
     return (
@@ -64,8 +78,14 @@ export default function Profile() {
       <h1>Profiles</h1>
       <div className="profileViewer">
         {allProfiles?.map((value, index) => {
+          let extraStyle = {};
+          if (userName) {
+            if (userName == value?.name) {
+              extraStyle = { background: "red" };
+            }
+          }
           return (
-            <Link to={"/profiles/" + value.name} key={index} className="profileListing">
+            <Link to={"/profiles/" + value.name} key={index} className="profileListing" style={extraStyle}>
               <span>{value?.name ?? "na"}</span>
               <span>{value?.email ?? "na"}</span>
               <span>{value?.credits ?? 0}</span>
@@ -75,13 +95,8 @@ export default function Profile() {
         <button
           id="previous"
           onClick={async () => {
-            const res = await getAllUsers(currentOffset);
-            console.log(res);
-            if (res?.data?.length > 0) {
-              setAllProfiles(res.data ?? []);
-              if (currentOffset > 99) {
-                setCurrentOffset(currentOffset - 100);
-              }
+            if (currentOffset > 99) {
+              setCurrentOffset(currentOffset - 100);
             }
           }}
         >
@@ -90,12 +105,7 @@ export default function Profile() {
         <button
           id="next"
           onClick={async () => {
-            const res = await getAllUsers(currentOffset);
-            console.log(res);
-            if (res?.data?.length > 0) {
-              setAllProfiles(res.data ?? []);
-              setCurrentOffset(currentOffset + 100);
-            }
+            setCurrentOffset(currentOffset + 100);
           }}
         >
           Next

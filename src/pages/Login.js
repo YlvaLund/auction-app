@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./login.scss";
 import "./Signup.scss";
 import { userLogin } from "../utils/users";
-import { storeToken } from "../utils/token";
+import { storeUser } from "../utils/token";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -18,12 +18,12 @@ export default function Login() {
 
     if (Object.keys(validationErrors).length === 0) {
       // Perform signup action
-      console.log("Form submitted successfully");
       const res = await userLogin(formData);
-      console.log(res);
       if (res?.status === 200 && res?.data?.accessToken?.length > 0) {
-        console.log("!");
-        storeToken(res.data.accessToken);
+        storeUser(res.data.accessToken, res?.data?.name ?? "", res?.data?.credits ?? 0);
+        window.location = "/auctions";
+      } else {
+        alert("Error when trying to log in...");
       }
     }
   };

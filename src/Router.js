@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import ErrorPage from "./components/Error";
 import Auction from "./pages/Auction";
 import Profile from "./pages/Profile";
-import Main from "./pages/Main";
 import Auctions from "./pages/Auctions";
 import Signup from "./pages/Signup";
 import About from "./pages/About";
@@ -16,7 +15,7 @@ export default function Router() {
       path: "/",
       element: (
         <Layout>
-          <Main />
+          <Auctions />
         </Layout>
       ),
       errorElement: <ErrorPage />,
