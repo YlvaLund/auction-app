@@ -80,7 +80,7 @@ export default function Profile() {
         {allProfiles?.map((value, index) => {
           let extraStyle = {};
           if (userName) {
-            if (userName == value?.name) {
+            if (userName === value?.name) {
               extraStyle = { background: "red" };
             }
           }

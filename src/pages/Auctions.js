@@ -63,6 +63,15 @@ function Auctions() {
       {showAuctionDetails ? (
         <div>
           <h1>Auction!</h1>
+          <div>{userName}</div>
+          <input
+            type="text"
+            value={auctionDetails?.name ?? ""}
+            onChange={(e) => {
+              console.log(e);
+              setAuctionDetails({ name: e.target.value });
+            }}
+          />
         </div>
       ) : (
         <div className="auctions-container">

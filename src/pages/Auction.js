@@ -144,6 +144,7 @@ function Auction() {
           </div>
         )}
       </div>
+      <div>{userName}</div>
     </div>
   );
 }
