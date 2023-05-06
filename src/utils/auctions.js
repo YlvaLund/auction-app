@@ -25,3 +25,12 @@ export async function setNewBid(id, price) {
   );
   return res;
 }
+
+export async function createAuction(data) {
+  const res = await axios.post("https://api.noroff.dev/api/v1/auction/listings", data, {
+    headers: {
+      Authorization: "Bearer " + getToken(),
+    },
+  });
+  return res;
+}

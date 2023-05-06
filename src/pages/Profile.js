@@ -58,7 +58,10 @@ export default function Profile() {
             {profileData?.listings?.map((item) => {
               return (
                 <div className="listings__item" key={item.id}>
-                  {item?.title}
+                  <h3>{item?.title}</h3>
+                  <div>
+                    <Link to={"/auction/" + item.id}>View</Link>
+                  </div>
                 </div>
               );
             })}

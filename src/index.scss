@@ -13,3 +13,18 @@ main {
   background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px;
   min-height: 100vh;
 }
+
+input[type="text"],
+input[type="tel"],
+input[type="epost"],
+input[type="password"],
+input,
+select {
+  padding: 4px 2px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 100px;
+}

@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./Navigation.scss";
-import { destroyToken, getToken } from "../../utils/token";
+import { destroyToken, getToken, getUserDetails } from "../../utils/token";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userName, credits] = getUserDetails();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -34,6 +35,10 @@ const Navigation = () => {
             <li>
               <Link to="/profiles">Profiles</Link>
             </li>
+            <li>
+              <Link to={"/profiles/" + userName}>My Profile</Link>
+            </li>
+            <div>{credits}</div>
             <li>
               <Link
                 to="/"

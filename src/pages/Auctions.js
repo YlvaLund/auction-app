@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./Auctions.scss";
 import { Link } from "react-router-dom";
-import { getAuctions } from "../utils/auctions";
+import { getAuctions, createAuction } from "../utils/auctions";
 import { getUserDetails } from "../utils/token";
 
 function Auctions() {
@@ -61,17 +61,103 @@ function Auctions() {
         )}
       </div>
       {showAuctionDetails ? (
-        <div>
+        <div className="create__auction">
           <h1>Auction!</h1>
           <div>{userName}</div>
-          <input
-            type="text"
-            value={auctionDetails?.name ?? ""}
-            onChange={(e) => {
-              console.log(e);
-              setAuctionDetails({ name: e.target.value });
+          {/* {
+  "title": "string",
+  "description": "string",
+  "endsAt": "2023-04-24T19:24:55.876Z",
+  "tags": [
+    "string"
+  ],
+  "media": "string"
+} */}
+          <label>
+            Title
+            <input
+              type="text"
+              value={auctionDetails?.title ?? ""}
+              onChange={(e) => {
+                setAuctionDetails({ ...auctionDetails, title: e.target.value });
+              }}
+            />
+          </label>
+          <label>
+            Image Path
+            <input
+              type="text"
+              value={auctionDetails?.media ?? ""}
+              onChange={(e) => {
+                setAuctionDetails({ ...auctionDetails, media: e.target.value });
+              }}
+            />
+          </label>
+          <label>
+            Description
+            <textarea
+              type="text"
+              value={auctionDetails?.description ?? ""}
+              onChange={(e) => {
+                setAuctionDetails({ ...auctionDetails, description: e.target.value });
+              }}
+            ></textarea>
+          </label>
+          <label>
+            <span>Auction ends at:</span>
+            <input
+              type="datetime-local"
+              value={auctionDetails?.endsAt ?? new Date()}
+              onChange={(e) => {
+                setAuctionDetails({ ...auctionDetails, endsAt: e.target.value });
+              }}
+            />
+          </label>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              let inputValue = document.getElementById("newTag");
+              let value = inputValue.value;
+              console.log(value);
+              let curentArray = auctionDetails?.tags ?? [];
+              curentArray.push(value);
+              setAuctionDetails({ ...auctionDetails, tags: curentArray });
             }}
-          />
+          >
+            <div>
+              {auctionDetails?.tags?.map((t) => {
+                return (
+                  <span className="auction__tag" key={t}>
+                    {t}
+                  </span>
+                );
+              })}
+            </div>
+            <label>
+              <span>Add Tag:</span>
+              <input type="text" id="newTag" />
+              <button type="submit">Add</button>
+            </label>
+          </form>
+
+          <button
+            onClick={async () => {
+              console.log(auctionDetails);
+              let inputObject = { ...auctionDetails };
+              let media = [];
+              media.push(auctionDetails.media);
+              inputObject.media = media;
+              const res = await createAuction(inputObject);
+              if (res?.status === 201 || res?.status === 200) {
+                alert("Auction created");
+                setAuctionDetails({});
+                setShowAuctionDetails(false);
+              }
+            }}
+          >
+            <span>Create NEW Auction!</span>
+          </button>
         </div>
       ) : (
         <div className="auctions-container">
