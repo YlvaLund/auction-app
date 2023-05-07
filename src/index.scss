@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  font-family: "Book Antiqua", Courier, monospace;
+}
+
 main {
   background-color: #ffffff;
   opacity: 1;
@@ -20,9 +24,10 @@ input[type="epost"],
 input[type="password"],
 input,
 select {
-  padding: 4px 2px;
+  padding: 4px 6px;
   outline: none;
   border: 1px solid #ccc;
+  border-radius: 0.25rem;
 }
 
 textarea {
@@ -40,4 +45,9 @@ textarea {
     text-align: center;
     margin-bottom: 1rem;
   }
+}
+
+button {
+  border-radius: 0.25rem;
+  padding: 2px 3px;
 }
