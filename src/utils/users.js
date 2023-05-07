@@ -35,3 +35,19 @@ export async function getUser(name) {
   });
   return res;
 }
+
+export async function putNewAvatar(name, img) {
+  if (!img) return;
+
+  const inputData = {
+    avatar: img,
+  };
+
+  const res = await axios.put("https://api.noroff.dev/api/v1/auction/profiles/" + name + "/media", inputData, {
+    headers: {
+      Authorization: "Bearer " + getToken(),
+    },
+  });
+
+  return res;
+}

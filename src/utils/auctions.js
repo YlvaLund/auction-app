@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getToken } from "./token";
 
-export async function getAuctions() {
-  const res = await axios.get("https://api.noroff.dev/api/v1/auction/listings?_active=true&_bids=true&_seller=true");
+export async function getAuctions(offset) {
+  const res = await axios.get(`https://api.noroff.dev/api/v1/auction/listings?offset=${offset}&_active=true&_seller=false&_bids=false`);
   return res;
 }
 

@@ -55,15 +55,15 @@ export default function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="on">
         <div style={{ display: "grid" }}>
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} />
+          <input type="email" name="email" id="email" autoComplete="email" value={formData.email} onChange={handleChange} />
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div style={{ display: "grid" }}>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" minLength={8} value={formData.password} onChange={handleChange} />
+          <input type="password" name="password" autoComplete="current-password" id="password" minLength={8} value={formData.password} onChange={handleChange} />
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
         <button type="submit">Login</button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getAllUsers, getUser } from "../utils/users";
+import { getAllUsers, getUser, putNewAvatar } from "../utils/users";
 import { getUserDetails } from "../utils/token";
 import "./Profile.scss";
 
@@ -42,6 +42,33 @@ export default function Profile() {
       <div className="profile__container">
         <div className="profileData__container">
           <h1>{profileData?.name}</h1>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {profileData?.avatar?.length > 0 && <img className="profileImage" src={profileData.avatar} />}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const inputValue = document.getElementById("avatarInput");
+                let avatarPath = inputValue.value;
+                console.log(avatarPath);
+                if (avatarPath?.includes("http")) {
+                  const completeSubmit = async () => {
+                    try {
+                      const res = await putNewAvatar(userName, avatarPath);
+                      console.log(res);
+                    } catch (err) {
+                      console.log(err);
+                    }
+                  };
+
+                  completeSubmit();
+                }
+              }}
+            >
+              <span>Avatar url</span>
+              <input type="text" id="avatarInput" />
+              <button>Submit avatar</button>
+            </form>
+          </div>
           <div>
             <span>Email:</span>
             <span>{profileData?.email}</span>

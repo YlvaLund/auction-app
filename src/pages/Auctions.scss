@@ -29,7 +29,7 @@
     padding: 10px;
     cursor: pointer;
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 0;
     left: 0px;
     transition: background-color 0.3s ease;
     background-color: #d0e0cb;
@@ -59,7 +59,7 @@
 
 div.auction__tag__container {
   display: flex;
-  position: absolute;
+  position: relative;
   bottom: 3px;
   left: 3px;
   gap: 1rem;

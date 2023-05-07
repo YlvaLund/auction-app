@@ -114,6 +114,10 @@ function Auction() {
                     if (currentBid < newBid) {
                       const res = await sendNewBid(auctionDetails?.id, newBid);
                       console.log(res);
+                      if (res.status === 200) {
+                        alert("Bid accepted");
+                        setAuctionDetails(res.data);
+                      }
                     } else {
                       alert("You can not bid unless the new bid is higher than the current bid.");
                     }
@@ -141,6 +145,23 @@ function Auction() {
                 </div>
               </div>
             </div>
+            <aside>
+              <h3>Bids</h3>
+              {auctionDetails?.bids?.length > 0 && (
+                <div>
+                  {auctionDetails.bids.map((b) => {
+                    let date = new Date(b.created);
+                    return (
+                      <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+                        <span>{date.toDateString()}</span>
+                        <span>{b.bidderName}</span>
+                        <span>{b.amount}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </aside>
           </div>
         )}
       </div>

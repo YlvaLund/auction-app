@@ -56,6 +56,7 @@ div.profile__container {
     flex-direction: column;
     gap: 0.5rem;
   }
+
   .profileData__container {
     grid-area: profile;
     border: 1px solid #ccc;
@@ -63,6 +64,12 @@ div.profile__container {
       display: grid;
       grid-template-columns: 1fr 3fr;
       max-width: 100%;
+    }
+    .profileImage {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      object-position: center;
     }
   }
   .profileData__listings {

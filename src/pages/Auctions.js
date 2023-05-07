@@ -12,15 +12,16 @@ function Auctions() {
   const [userName, credits] = getUserDetails();
   const [showAuctionDetails, setShowAuctionDetails] = useState(false);
   const [auctionDetails, setAuctionDetails] = useState({});
+  const [currentOffset, setCurrentOffset] = useState(0);
 
   useEffect(() => {
     // Fetch auctions data from API
     fetchAuctions();
-  }, []);
+  }, [currentOffset]);
 
   const fetchAuctions = async () => {
     // Replace with your API endpoint
-    const response = await getAuctions();
+    const response = await getAuctions(currentOffset);
     setAuctions(response?.data ?? []);
   };
 
@@ -59,6 +60,24 @@ function Auctions() {
             <span>{credits}</span>
           </div>
         )}
+        <button
+          id="previous"
+          onClick={async () => {
+            if (currentOffset > 99) {
+              setCurrentOffset(currentOffset - 100);
+            }
+          }}
+        >
+          Previous
+        </button>
+        <button
+          id="next"
+          onClick={async () => {
+            setCurrentOffset(currentOffset + 100);
+          }}
+        >
+          Next
+        </button>
       </div>
       {showAuctionDetails ? (
         <div className="create__auction">

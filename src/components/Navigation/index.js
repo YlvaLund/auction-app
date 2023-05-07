@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./Navigation.scss";
 import { destroyToken, getToken, getUserDetails } from "../../utils/token";
+import imgsrc from "./logo.png";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,9 @@ const Navigation = () => {
   return (
     <nav className="navigation">
       <div className="logo">
-        <Link to="/">Auction House</Link>
+        <Link to="/">
+          <img src={imgsrc} alt="Auction house logo" tabIndex={0} width="70" height="70" />
+        </Link>
       </div>
       <button className="menu-toggle" onClick={toggleMenu}>
         {menuOpen ? <FiX /> : <FiMenu />}
